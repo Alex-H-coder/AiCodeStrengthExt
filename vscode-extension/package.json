@@ -1,0 +1,83 @@
+{
+  "name": "ai-code-analyzer",
+  "displayName": "AI Code Analyzer",
+  "description": "Analyzes your code using AI — detects duplicate blocks, scores code strength, and provides recommendations.",
+  "version": "1.0.0",
+  "publisher": "localdev",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters", "Other"],
+  "icon": "media/icon.png",
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiCodeAnalyzer.analyze",
+        "title": "AI Analyzer: Analyze Current File",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "aiCodeAnalyzer.analyzeSelection",
+        "title": "AI Analyzer: Analyze Selected Code",
+        "icon": "$(search)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "aiCodeAnalyzer.analyze",
+          "group": "aiAnalyzer@1"
+        },
+        {
+          "command": "aiCodeAnalyzer.analyzeSelection",
+          "group": "aiAnalyzer@2",
+          "when": "editorHasSelection"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "aiCodeAnalyzer.analyze",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "aiCodeAnalyzer.analyze",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "AI Code Analyzer",
+      "properties": {
+        "aiCodeAnalyzer.apiUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "Base URL of the Django AI Analyzer backend."
+        },
+        "aiCodeAnalyzer.analyzeOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze the file on save."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.24.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+}

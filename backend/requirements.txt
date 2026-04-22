@@ -1,0 +1,14 @@
+django>=4.2
+djangorestframework
+django-cors-headers
+radon
+google-generativeai
+python-dotenv
+pyflakes
+
+# more improvements can be added in the future, such as:
+# a side bar
+# login / logout functionality
+# save analysis history for users
+# more detailed AI recommendations (e.g. code snippets, links to docs, etc.)
+# use line numbers in the duplicate block detection results
